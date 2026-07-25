@@ -7,13 +7,30 @@ public class Gamemanager : MonoBehaviour
     
     public int PlayerScore {  get { return playerScore; } set { playerScore = value; } }
 
+    [SerializeField]
+    private GameObject[] ballPositions;
+
+    [SerializeField]
+    private GameObject ballPrefab;
+
     public static Gamemanager instance;
+
+    private void Awake()
+    {
+        instance = this; //ใส่ในสตาร์ทข้อเสีย มันจะอยู่ในบอล มี instance เพื่อความชัวร์
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        instance = this; //ใส่ในสตาร์ทข้อเสีย มันจะอยู่ในบอล มี instance เพื่อความชัวร์
+        SetBall(BallColor.Red, 1);
+        SetBall(BallColor.Yellow, 2);
+        SetBall(BallColor.Green, 3);
+        SetBall(BallColor.Brown, 4);
+        SetBall(BallColor.Blue, 5);
+        SetBall(BallColor.Pink, 6);
+        SetBall(BallColor.Black, 7);
     }
 
     // Update is called once per frame
@@ -21,4 +38,16 @@ public class Gamemanager : MonoBehaviour
     {
         
     }
+
+    private void SetBall(BallColor col, int i)
+    {
+        GameObject obj = Instantiate(ballPrefab,
+                    ballPositions[i].transform.position,
+                    Quaternion.identity); //qutrenion เป็นระบบหมุน
+
+        Ball b = obj.GetComponent<Ball>();
+        b.SetColorAndPoint(col);
+    }
+
+    
 }
