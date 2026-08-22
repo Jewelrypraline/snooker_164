@@ -8,11 +8,14 @@ public class Gamemanager : MonoBehaviour
     
     public int PlayerScore {  get { return playerScore; } set { playerScore = value; } }
 
-    [Serializable]
-    private GameObject[] ballPosition;
+    [SerializeField]
+    private GameObject[] ballPositions;
 
     [SerializeField]
     private GameObject ballPrefab;
+
+    [SerializeField]
+    private GameObject cueBall;
 
     public static Gamemanager instance;
 
@@ -37,7 +40,8 @@ public class Gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (TouchScreenKeyboard.current.spaceKey.wasPressedThisFrame)
+            ShootBall();
     }
 
     private void SetBall(BallColor col, int i)
@@ -48,6 +52,12 @@ public class Gamemanager : MonoBehaviour
 
         Ball b = obj.GetComponent<Ball>();
         b.SetColorAndPoint(col);
+    }
+
+    private void ShootBall()
+    {
+        Rigidbody rd = cueBall.GetComponent<Rigidbody>();
+        rd.AddRelativeForce(Vector3.forward * 50, ForceMode.Impulse);
     }
 
     
