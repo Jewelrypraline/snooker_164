@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Gamemanager : MonoBehaviour
@@ -7,8 +8,8 @@ public class Gamemanager : MonoBehaviour
     
     public int PlayerScore {  get { return playerScore; } set { playerScore = value; } }
 
-    [SerializeField]
-    private GameObject[] ballPositions;
+    [Serializable]
+    private GameObject[] ballPosition;
 
     [SerializeField]
     private GameObject ballPrefab;
