@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class Gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TouchScreenKeyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
             ShootBall();
     }
 
